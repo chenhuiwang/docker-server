@@ -6,6 +6,7 @@ COPY php.ini /usr/local/etc/php/
 RUN echo "https://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories \
     && apk update \
     && apk upgrade  \
+    && apk add autoconf \
     && docker-php-ext-install bcmath pdo_mysql opcache \
     && pecl install redis \
     && docker-php-ext-enable redis \
