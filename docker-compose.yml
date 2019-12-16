@@ -1,0 +1,24 @@
+version: '3'
+services:
+  php-fpm:
+    # build 指定为构建镜像上下文路径
+    build: ./php-fpm
+    # 暴露端口信息 - "宿主机端口:容器暴露端口"
+    ports:
+    - "9000:9000"
+    volumes:
+    - ./www:/usr/share/nginx
+    - ./php-fpm/logs:/usr/local/var/log
+  nginx:
+    build: ./nginx
+    ports:
+    - "8001:80"
+    volumes:
+    - ./www:/usr/share/nginx
+    - ./nginx/conf.d:/etc/nginx/conf.d
+    - ./nginx/logs:/var/log/nginx
+    depends_on:
+      - php-fpm
+
+
+
