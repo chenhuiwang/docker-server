@@ -1,17 +1,26 @@
 version: '3'
 services:
-  php-fpm:
-    # build 指定为构建镜像上下文路径
-    build: ./php-fpm
-    # 暴露端口信息 - "宿主机端口:容器暴露端口"
+  redis:
+    container_name: redis
+    build: ./redis
     ports:
-    - "9000:9000"
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/data
+  php-fpm:
+    container_name: php-fpm
+    build: ./php-fpm
+    ports:
+      - "9000:9000"
     volumes:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
       - ./www:/usr/share/nginx
       - ./php-fpm/logs:/usr/local/var/log
+    depends_on:
+      - redis
   nginx:
+    container_name: nginx
     build: ./nginx
     ports:
     - "8001:80"
