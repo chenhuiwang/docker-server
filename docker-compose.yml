@@ -7,16 +7,20 @@ services:
     ports:
     - "9000:9000"
     volumes:
-    - ./www:/usr/share/nginx
-    - ./php-fpm/logs:/usr/local/var/log
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+      - ./www:/usr/share/nginx
+      - ./php-fpm/logs:/usr/local/var/log
   nginx:
     build: ./nginx
     ports:
     - "8001:80"
     volumes:
-    - ./www:/usr/share/nginx
-    - ./nginx/conf.d:/etc/nginx/conf.d
-    - ./nginx/logs:/var/log/nginx
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+      - ./www:/usr/share/nginx
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
     depends_on:
       - php-fpm
 
