@@ -2,9 +2,9 @@ FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/
 
-WORKDIR /usr/share/nginx
+WORKDIR /var/www
 
-VOLUME ["/usr/share/nginx", "/var/log/nginx", "/etc/nginx/conf.d"]
+VOLUME ["/var/www", "/var/log/nginx", "/etc/nginx/conf.d"]
 
 EXPOSE 80 443
 

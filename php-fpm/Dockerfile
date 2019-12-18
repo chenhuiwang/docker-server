@@ -6,16 +6,16 @@ COPY php.ini /usr/local/etc/php/
 RUN echo "https://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories \
     && apk update \
     && apk upgrade  \
-    && apk add autoconf g++ make \
+    && apk add $PHPIZE_DEPS \
     && docker-php-ext-install bcmath pdo_mysql opcache \
     && pecl install redis \
     && docker-php-ext-enable redis \
-    && mkdir -p /usr/share/nginx \
-    && chown -R www-data:www-data /usr/share/nginx
+    && mkdir -p /var/www \
+    && chown -R www-data:www-data /var/www
 
-WORKDIR /usr/share/nginx
+WORKDIR /var/www
 
-VOLUME ["/usr/local/var/log", "/usr/share/nginx"]
+VOLUME ["/usr/local/var/log", "/var/www"]
 
 EXPOSE 9000
 

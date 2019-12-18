@@ -15,7 +15,7 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
-      - ./www:/usr/share/nginx
+      - ./www:/var/www
       - ./php-fpm/logs:/usr/local/var/log
     depends_on:
       - redis
@@ -27,7 +27,7 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
-      - ./www:/usr/share/nginx
+      - ./www:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
     depends_on:
